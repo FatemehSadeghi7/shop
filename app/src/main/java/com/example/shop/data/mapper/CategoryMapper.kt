@@ -4,7 +4,6 @@ import com.example.shop.data.local.entity.CategoryEntity
 import com.example.shop.data.remote.dto.CategoryDto
 import com.example.shop.domain.model.Category
 
-// DTO → Entity
 fun CategoryDto.toEntity(): CategoryEntity {
     return CategoryEntity(
         id = id,
@@ -16,7 +15,6 @@ fun CategoryDto.toEntity(): CategoryEntity {
     )
 }
 
-// Entity → Domain
 fun CategoryEntity.toDomain(): Category {
     return Category(
         id = id,
@@ -28,7 +26,6 @@ fun CategoryEntity.toDomain(): Category {
     )
 }
 
-// DTO → Domain
 fun CategoryDto.toDomain(): Category {
     return Category(
         id = id,

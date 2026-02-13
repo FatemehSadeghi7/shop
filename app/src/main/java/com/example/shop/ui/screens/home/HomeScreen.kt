@@ -25,6 +25,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.GridView
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
@@ -54,6 +55,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.platform.LocalDensity
 import com.example.shop.domain.model.Product
 import com.example.shop.ui.components.ErrorState
 import com.example.shop.ui.components.ShimmerProductCard
@@ -84,9 +90,9 @@ fun HomeScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-
             .verticalScroll(rememberScrollState()),
     ) {
+        // ───── Top Bar ─────
         HomeTopBar(
             cartItemCount = uiState.cartItemCount,
             onSearchClick = onNavigateToSearch,
@@ -96,6 +102,7 @@ fun HomeScreen(
 
         Spacer(modifier = Modifier.height(12.dp))
 
+        // ───── Sale Banner ─────
         AnimatedVisibility(
             visible = isVisible,
             enter = fadeIn(tween(600)) + slideInVertically(
@@ -110,6 +117,7 @@ fun HomeScreen(
 
         Spacer(modifier = Modifier.height(36.dp))
 
+        // ───── Best Sellers ─────
         AnimatedVisibility(
             visible = isVisible,
             enter = fadeIn(tween(500, delayMillis = 300)) + slideInVertically(
@@ -200,6 +208,7 @@ fun HomeScreen(
     }
 }
 
+// ───── Top Bar ─────
 @Composable
 private fun HomeTopBar(
     cartItemCount: Int,
@@ -210,8 +219,7 @@ private fun HomeTopBar(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp)
-            .padding(top = 4.dp, bottom = 4.dp),
+            .padding(horizontal = 20.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -252,26 +260,19 @@ private fun HomeTopBar(
                     )
                 }
             }
-            IconButton(onClick = onGridClick) {
-                Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                    repeat(2) {
-                        Row(horizontalArrangement = Arrangement.spacedBy(3.dp)) {
-                            repeat(2) {
-                                Box(
-                                    modifier = Modifier
-                                        .size(5.dp)
-                                        .clip(CircleShape)
-                                        .background(Color.Black)
-                                )
-                            }
-                        }
-                    }
-                }
+            IconButton(onClick = { onGridClick() }) {
+                Icon(
+                    imageVector = Icons.Outlined.GridView,
+                    contentDescription = "Discover",
+                    tint = Color.Black,
+                    modifier = Modifier.size(22.dp),
+                )
             }
         }
     }
 }
 
+// ───── Sale Banner ─────
 @Composable
 private fun SaleBannerCard(modifier: Modifier = Modifier) {
     Box(
@@ -281,6 +282,7 @@ private fun SaleBannerCard(modifier: Modifier = Modifier) {
             .clip(RoundedCornerShape(20.dp))
             .clipToBounds(),
     ) {
+        // بک‌گراند نارنجی گرادیان
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -294,6 +296,7 @@ private fun SaleBannerCard(modifier: Modifier = Modifier) {
                 )
         )
 
+        // Page curl - گرادیان سفید سمت راست
         Box(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
@@ -311,14 +314,17 @@ private fun SaleBannerCard(modifier: Modifier = Modifier) {
                 )
         )
 
+        // محتوای بنر
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(28.dp),
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
+            // نقطه‌چین بالا
             DottedLine()
 
+            // متن‌ها
             Column {
                 Text(
                     text = "BIG\nSEASON\nSALE",
@@ -356,6 +362,7 @@ private fun SaleBannerCard(modifier: Modifier = Modifier) {
     }
 }
 
+// ───── نقطه‌چین (کوچک‌تر، داخل بنر) ─────
 @Composable
 private fun DottedLine() {
     Row(

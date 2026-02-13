@@ -71,7 +71,6 @@ fun CartScreen(
             .background(Color.White)
         ,
     ) {
-        // Top Bar
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -109,7 +108,6 @@ fun CartScreen(
                 modifier = Modifier.weight(1f),
             )
         } else {
-            // Cart Items
             LazyColumn(
                 modifier = Modifier.weight(1f),
                 contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp),
@@ -197,7 +195,6 @@ private fun CartItemCard(
 
             Spacer(modifier = Modifier.width(14.dp))
 
-            // Product Info
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = cartItem.product.name,
@@ -225,7 +222,6 @@ private fun CartItemCard(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // Quantity Controls
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(12.dp),

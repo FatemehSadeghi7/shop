@@ -27,6 +27,7 @@ import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.ShoppingBag
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -146,7 +147,6 @@ fun DiscoverScreen(
                         }
                     }
 
-                    // ───── Category Cards ─────
                     itemsIndexed(
                         items = uiState.categories,
                         key = { _, cat -> cat.id },
@@ -199,7 +199,7 @@ private fun DiscoverTopBar(
             Box {
                 IconButton(onClick = onCartClick) {
                     Icon(
-                        imageVector = Icons.Outlined.Lock,
+                        imageVector = Icons.Outlined.ShoppingBag,
                         contentDescription = "Cart",
                         tint = Color.Black,
                         modifier = Modifier.size(22.dp),

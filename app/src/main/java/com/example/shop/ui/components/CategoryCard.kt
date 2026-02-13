@@ -45,7 +45,6 @@ fun CategoryCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            // متن سمت چپ-بالا
             Column(
                 modifier = Modifier
                     .align(Alignment.TopStart)
@@ -67,7 +66,6 @@ fun CategoryCard(
                 )
             }
 
-            // تصویر از drawable سمت راست
             Image(
                 painter = painterResource(id = ImageResource.getCategoryImage(category.imageUrl)),
                 contentDescription = category.name,

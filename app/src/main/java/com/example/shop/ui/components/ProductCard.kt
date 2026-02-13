@@ -53,7 +53,6 @@ fun ProductCard(
         modifier = modifier
             .clickable { onProductClick(product.id) },
     ) {
-        // تصویر محصول
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -70,7 +69,6 @@ fun ProductCard(
                     contentScale = ContentScale.Crop,
                 )
 
-                // بج تخفیف
                 if (product.hasDiscount) {
                     Box(
                         modifier = Modifier
@@ -89,7 +87,6 @@ fun ProductCard(
                     }
                 }
 
-                // دکمه علاقه‌مندی
                 IconButton(
                     onClick = { onFavoriteClick(product.id) },
                     modifier = Modifier
@@ -105,7 +102,6 @@ fun ProductCard(
                     )
                 }
 
-                // Out of stock overlay
                 if (!product.inStock) {
                     Box(
                         modifier = Modifier
@@ -124,7 +120,6 @@ fun ProductCard(
             }
         }
 
-        // اطلاعات محصول
         Column(
             modifier = Modifier.padding(top = 8.dp),
             verticalArrangement = Arrangement.spacedBy(2.dp),

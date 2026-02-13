@@ -104,7 +104,6 @@ fun ProductDetailScreen(
 
                 .verticalScroll(rememberScrollState()),
         ) {
-            // Product Image
             Box(
                 modifier = Modifier
                     .fillMaxWidth()

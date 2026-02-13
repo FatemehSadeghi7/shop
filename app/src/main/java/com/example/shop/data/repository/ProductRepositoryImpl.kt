@@ -138,9 +138,7 @@ class ProductRepositoryImpl @Inject constructor(
         return result
     }
 
-    /**
-     * داده‌های هاردکد (بر اساس تصاویر Vertlune)
-     */
+
     private fun getHardcodedProducts(): List<Product> = listOf(
         Product(
             id = 1, name = "Surge Short", description = "Lightweight training shorts with 4-way stretch fabric.",

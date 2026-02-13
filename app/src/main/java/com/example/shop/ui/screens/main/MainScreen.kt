@@ -8,18 +8,24 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.outlined.GridView
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.ShoppingBag
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -33,8 +39,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shop.R
@@ -46,13 +54,14 @@ fun MainScreen(
     onNavigateToHome: () -> Unit,
     onSearchClick: () -> Unit = {},
     onCartClick: () -> Unit = {},
-) {
+    onDiscoverClick: () -> Unit = {},
+
+    ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
-        // ───── لایه ۱: عکس - کل صفحه رو پر میکنه ─────
         Image(
             painter = painterResource(id = R.drawable.bitmap),
             contentDescription = "Fashion model",
@@ -61,19 +70,20 @@ fun MainScreen(
             alignment = Alignment.Center,
         )
 
-        // ───── لایه ۲: پنل سفید VERTLUNE سمت راست (۳۵% عرض) ─────
         Box(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
                 .fillMaxHeight()
+                .offset(x = (-16).dp)
                 .fillMaxWidth(0.21f)
                 .background(Color.White),
+
             contentAlignment = Alignment.Center,
         ) {
             Text(
                 text = "VERTLUNE",
                 fontFamily = PlayfairDisplay,
-                fontWeight = FontWeight.W800,
+                fontWeight = FontWeight.W500,
                 fontSize = 64.sp,
                 color = Color.Black,
                 letterSpacing = 4.sp,
@@ -98,7 +108,6 @@ fun MainScreen(
             )
         }
 
-        // ───── لایه ۳: خط عمودی گرادیان ─────
         Box(
             modifier = Modifier
                 .align(Alignment.CenterStart)
@@ -108,21 +117,29 @@ fun MainScreen(
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            Color.White,
-                            Color.White.copy(alpha = 0.1f),
-                            Color.White,
+                            //Color.White,
+                            Color.White.copy(alpha = 0.9f),
+
+                            Color.White.copy(alpha = 0.2f),
+                            Color.White.copy(alpha = 0.2f),
+                            Color.White.copy(alpha = 0.2f),
+                            Color.White.copy(alpha = 0.2f),
+                            Color.White.copy(alpha = 0.2f),
+                            Color.White.copy(alpha = 0.2f),
+                            Color.White.copy(alpha = 0.2f),
+                            Color.White.copy(alpha = 0.9f),
+
+                          //  Color.White,
                         )
                     )
                 )
         )
 
-        // ───── لایه ۴: Top Bar ─────
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 58.dp, end = 8.dp, top = 52.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
+                .padding(horizontal = 8.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = "V",
@@ -130,32 +147,54 @@ fun MainScreen(
                 fontWeight = FontWeight.Bold,
                 fontSize = 52.sp,
                 color = Color.White,
+                modifier = Modifier.padding(top = 24.dp, start = 39.dp)
             )
 
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Spacer(modifier = Modifier.width(120.dp))
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 IconButton(onClick = onSearchClick) {
                     Icon(
                         imageVector = Icons.Outlined.Search,
                         contentDescription = "Search",
                         tint = Color.Black,
-                        modifier = Modifier.size(28.dp),
+                        modifier = Modifier.size(32.dp),
                     )
                 }
                 IconButton(onClick = onCartClick) {
                     Icon(
-                        imageVector = Icons.Outlined.Lock,
+                        imageVector = Icons.Outlined.ShoppingBag,
                         contentDescription = "Cart",
                         tint = Color.Black,
-                        modifier = Modifier.size(22.dp),
+                        modifier = Modifier.size(27.dp),
                     )
                 }
-                IconButton(onClick = {}) {
-                    GridDots()
+                IconButton(onClick = onDiscoverClick) {
+                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        repeat(2) {
+                            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                                repeat(2) {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(7.dp)
+                                            .clip(CircleShape)
+                                            .background(Color.Black)
+                                    )
+                                }
+                            }
+                        }
+                    }
                 }
+
             }
+
+
         }
 
-        // ───── لایه ۵: دکمه Arrow ─────
+        val dir = LocalLayoutDirection.current
+        val shift = if (dir == LayoutDirection.Rtl) 8.dp else (-8).dp
         Box(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
@@ -173,26 +212,12 @@ fun MainScreen(
                 imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                 contentDescription = "Go to Home",
                 tint = Color.White,
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier
+                    .align(if (dir == LayoutDirection.Rtl) Alignment.CenterEnd else Alignment.CenterStart)
+                    .padding(horizontal = 0.dp)
+                    .size(32.dp)
+                    .graphicsLayer(scaleX = 2.40f)
             )
-        }
-    }
-}
-
-@Composable
-private fun GridDots() {
-    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        repeat(2) {
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                repeat(2) {
-                    Box(
-                        modifier = Modifier
-                            .size(5.dp)
-                            .clip(CircleShape)
-                            .background(Color.Black)
-                    )
-                }
-            }
         }
     }
 }

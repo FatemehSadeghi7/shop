@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -31,7 +32,6 @@ fun ShopNavGraph(
         enterTransition = { fadeIn(animationSpec = tween(Constants.ANIMATION_DURATION)) },
         exitTransition = { fadeOut(animationSpec = tween(Constants.ANIMATION_DURATION)) },
     ) {
-        // Splash
         composable(route = Screen.Splash.route) {
             SplashScreen(
                 onSplashFinished = {
@@ -50,7 +50,8 @@ fun ShopNavGraph(
                     }
                 },
                 onSearchClick = { navController.navigate(Screen.Search.route) },
-                onCartClick = { navController.navigate(Screen.Cart.route) },
+                onCartClick = { navController.navigate(Screen.Cart.route)},
+                onDiscoverClick = { navController.navigate(Screen.Discover.route)},
             )
         }
 
@@ -66,7 +67,6 @@ fun ShopNavGraph(
             )
         }
 
-        // Shop
         composable(route = Screen.Shop.route) {
             ShopScreen(
                 onNavigateToProduct = { productId ->
@@ -79,7 +79,6 @@ fun ShopNavGraph(
             )
         }
 
-        // Discover
         composable(route = Screen.Discover.route) {
             DiscoverScreen(
                 onNavigateToShop = { categoryId ->
@@ -91,7 +90,6 @@ fun ShopNavGraph(
             )
         }
 
-        // Product Detail
         composable(
             route = Screen.ProductDetail.route,
             arguments = listOf(
@@ -116,7 +114,6 @@ fun ShopNavGraph(
             )
         }
 
-        // Cart
         composable(
             route = Screen.Cart.route,
             enterTransition = {
@@ -140,7 +137,6 @@ fun ShopNavGraph(
             )
         }
 
-        // Search
         composable(route = Screen.Search.route) {
             SearchScreen(
                 onNavigateBack = { navController.popBackStack() },

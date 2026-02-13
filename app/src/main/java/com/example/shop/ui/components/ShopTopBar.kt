@@ -53,7 +53,6 @@ fun ShopTopBar(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        // Left: Back button or Logo
         if (showBackButton) {
             IconButton(onClick = onBackClick) {
                 Icon(
@@ -78,7 +77,6 @@ fun ShopTopBar(
             )
         }
 
-        // Right: Actions
         Row(
             horizontalArrangement = Arrangement.spacedBy(4.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -121,7 +119,6 @@ fun ShopTopBar(
 
             if (showMenu) {
                 IconButton(onClick = onMenuClick) {
-                    // Grid dots icon (مطابق تصویر اپ)
                     Box(modifier = Modifier.size(20.dp)) {
                         // 4 dots grid
                         val dotSize = 4.dp

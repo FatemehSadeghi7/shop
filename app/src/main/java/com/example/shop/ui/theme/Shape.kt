@@ -12,7 +12,6 @@ val ShopShapes = Shapes(
     extraLarge = RoundedCornerShape(24.dp),
 )
 
-// Custom shapes
 val BottomSheetShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
 val ProductCardShape = RoundedCornerShape(12.dp)
 val CategoryCardShape = RoundedCornerShape(16.dp)

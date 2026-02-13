@@ -60,13 +60,11 @@ fun SaleBanner(
                 )
                 .clip(MaterialTheme.shapes.large),
         ) {
-            // محتوای بنر
             Column(
                 modifier = Modifier
                     .align(Alignment.CenterStart)
                     .padding(24.dp),
             ) {
-                // عنوان: BIG SEASON SALE
                 Text(
                     text = banner.title,
                     fontFamily = PlayfairDisplay,
@@ -79,7 +77,6 @@ fun SaleBanner(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // زیرعنوان: SAVE UP TO
                 Text(
                     text = banner.subtitle,
                     fontFamily = Poppins,
@@ -89,7 +86,6 @@ fun SaleBanner(
                     letterSpacing = 2.sp,
                 )
 
-                // درصد تخفیف: 75%
                 if (banner.discountPercent > 0) {
                     Row(
                         verticalAlignment = Alignment.Bottom,
@@ -114,7 +110,6 @@ fun SaleBanner(
                 }
             }
 
-            // Page curl effect (افکت تا خوردن صفحه)
             Box(
                 modifier = Modifier
                     .align(Alignment.CenterEnd)

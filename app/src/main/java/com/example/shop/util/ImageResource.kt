@@ -2,11 +2,7 @@ package com.example.shop.util
 
 import com.example.shop.R
 
-/**
- * مپ کردن نام تصویر به ریسورس drawable
- * شما عکس‌های واقعی رو در res/drawable قرار بدید
- * و اسم فایل‌ها رو مطابق کلیدها بذارید
- */
+
 object ImageResource {
 
     private val productImages = mapOf(
@@ -36,7 +32,6 @@ object ImageResource {
         "new_arrivals" to R.drawable.metal_vent_sleeve,
     )
 
-    // تصویر هیروی صفحه Home
     val heroImage = R.drawable.bitmap
 
     fun getProductImage(key: String): Int {

@@ -71,7 +71,6 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun HomeScreen(
-    onNavigateToShop: () -> Unit,
     onNavigateToProduct: (Int) -> Unit,
     onNavigateToSearch: () -> Unit,
     onNavigateToCart: () -> Unit,
@@ -92,7 +91,6 @@ fun HomeScreen(
             .background(Color.White)
             .verticalScroll(rememberScrollState()),
     ) {
-        // ───── Top Bar ─────
         HomeTopBar(
             cartItemCount = uiState.cartItemCount,
             onSearchClick = onNavigateToSearch,
@@ -102,7 +100,6 @@ fun HomeScreen(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // ───── Sale Banner ─────
         AnimatedVisibility(
             visible = isVisible,
             enter = fadeIn(tween(600)) + slideInVertically(
@@ -117,7 +114,6 @@ fun HomeScreen(
 
         Spacer(modifier = Modifier.height(36.dp))
 
-        // ───── Best Sellers ─────
         AnimatedVisibility(
             visible = isVisible,
             enter = fadeIn(tween(500, delayMillis = 300)) + slideInVertically(
@@ -158,7 +154,6 @@ fun HomeScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // ───── Products Grid ─────
         AnimatedVisibility(
             visible = isVisible,
             enter = fadeIn(tween(500, delayMillis = 500)),
@@ -272,7 +267,6 @@ private fun HomeTopBar(
     }
 }
 
-// ───── Sale Banner ─────
 @Composable
 private fun SaleBannerCard(modifier: Modifier = Modifier) {
     Box(
@@ -282,7 +276,6 @@ private fun SaleBannerCard(modifier: Modifier = Modifier) {
             .clip(RoundedCornerShape(20.dp))
             .clipToBounds(),
     ) {
-        // بک‌گراند نارنجی گرادیان
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -296,7 +289,6 @@ private fun SaleBannerCard(modifier: Modifier = Modifier) {
                 )
         )
 
-        // Page curl - گرادیان سفید سمت راست
         Box(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
@@ -314,17 +306,14 @@ private fun SaleBannerCard(modifier: Modifier = Modifier) {
                 )
         )
 
-        // محتوای بنر
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(28.dp),
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
-            // نقطه‌چین بالا
             DottedLine()
 
-            // متن‌ها
             Column {
                 Text(
                     text = "BIG\nSEASON\nSALE",
@@ -356,13 +345,11 @@ private fun SaleBannerCard(modifier: Modifier = Modifier) {
                 )
             }
 
-            // نقطه‌چین پایین
             DottedLine()
         }
     }
 }
 
-// ───── نقطه‌چین (کوچک‌تر، داخل بنر) ─────
 @Composable
 private fun DottedLine() {
     Row(
@@ -381,7 +368,6 @@ private fun DottedLine() {
     }
 }
 
-// ───── Product Card ─────
 @Composable
 private fun HomeProductCard(
     product: Product,
